@@ -89,7 +89,7 @@ const mapMarkers = {
 		lat: 48.863214,
 		lon: 2.315213,
 		img: '20210320_122919',
-		txt: 'Le <b>Pont Alexandre III</b> et le <b>Grand Palais</b> en arrière plan.',
+		txt: '<b>Arrivée :</b> le <b>Pont Alexandre III</b> et le <b>Grand Palais</b> en arrière plan.',
 		position: 'last'
 	},
 	9: {
