@@ -3,6 +3,8 @@
 
   <head>
     <title></title>
+	<meta name="robots" content="noindex, nofollow" />
+	<meta name="googlebot" content="noindex">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
@@ -11,28 +13,44 @@
     <!-- CSS -->
     <link rel="stylesheet" href="statics/css/seine.css">
 
-    
-	<style>
-		html {
-			height: 100%
-		}
-
-		body {
-			height: 100%;
-		}
-
-		#mapid {
-			height: 98%:
-		}
-	</style>
-
     <!-- leaflet statics: bibliothèque cartographique javascript OpenSource -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin=""/>
-    
   </head>
 
   <body id="page-body" class="page-wrap">
-    <div id="mapid" style="width: 100%; height: 98%; border: 2px solid #00004d;"></div>
+	<div style="display:none;">
+		<script type="text/javascript">
+			<!--//--><![CDATA[//><!--
+
+				if (document.images) {
+					img0 = new Image();
+					img1 = new Image();
+					img2 = new Image();
+					img3 = new Image();
+					img4 = new Image();
+					img5 = new Image();
+					img6 = new Image();
+					img7 = new Image();
+					img8 = new Image();
+					img9 = new Image();
+
+					img0.src = "statics/photos/20210320_110716.jpg";
+					img1.src = "statics/photos/20210320_111455.jpg";
+					img2.src = "statics/photos/20210320_111943.jpg";
+					img3.src = "statics/photos/20210320_112311.jpg";
+					img4.src = "statics/photos/20210320_114355.jpg";
+					img5.src = "statics/photos/20210320_114531.jpg"
+					img6.src = "statics/photos/20210320_115104.jpg";
+					img7.src = "statics/photos/20210320_115105.jpg";
+					img8.src = "statics/photos/20210320_122919.jpg";
+					img9.src = "statics/photos/20210320_125000.jpg";
+				}
+
+			//--><!]]>
+		</script>
+	</div>
+
+    <div id="mapid" class="mapid"></div>
 	<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
     <!-- http://calvinmetcalf.github.io/leaflet.shapefile/ http://calvinmetcalf.github.io/shapefile-js/ -->
     <script src="https://unpkg.com/shpjs@latest/dist/shp.js"></script> <!-- https://github.com/calvinmetcalf/shapefile-js -->
