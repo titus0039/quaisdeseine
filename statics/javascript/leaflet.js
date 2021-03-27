@@ -1,8 +1,8 @@
 ﻿
 // ICONS  *****************
 const greenIcon = L.icon({
-	iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-green.png',
-	shadowUrl: 'https://unpkg.com/leaflet@1.7.1/dist/images/marker-shadow.png',
+	iconUrl: 'statics/img/marker-icon-green.png',
+	shadowUrl: 'statics/img/marker-shadow.png',
 	iconSize: [25, 41],
 	iconAnchor: [12, 41],
 	popupAnchor: [1, -34],
@@ -10,8 +10,8 @@ const greenIcon = L.icon({
 });
 
 const redIcon = L.icon({
-	iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-red.png',
-	shadowUrl: 'https://unpkg.com/leaflet@1.7.1/dist/images/marker-shadow.png',
+	iconUrl: 'statics/img/marker-icon-red.png',
+	shadowUrl: 'statics/img/marker-shadow.png',
 	iconSize: [25, 41],
 	iconAnchor: [12, 41],
 	popupAnchor: [1, -34],
@@ -19,8 +19,8 @@ const redIcon = L.icon({
 });
 
 const goldIcon = L.icon({
-	iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-gold.png',
-	shadowUrl: 'https://unpkg.com/leaflet@1.7.1/dist/images/marker-shadow.png',
+	iconUrl: 'statics/img/marker-icon-gold.png',
+	shadowUrl: 'statics/img/marker-shadow.png',
 	iconSize: [25, 41],
 	iconAnchor: [12, 41],
 	popupAnchor: [1, -34],
@@ -33,70 +33,70 @@ const mapMarkers = {
 		lat: 48.85381965,
 		lon: 2.34460205, 
 		img: '20210320_110716',
-		txt: '<b>Départ :</b> Quai des Orfèvres',
+		txt: '<b>Départ :</b> le quai des Orfèvres.',
 		position: 'first'
 	},
 	1: {
 		lat: 48.856092,
 		lon: 2.341933, 
 		img: '20210320_111455',
-		txt: 'Sur le quai des Orfèvres en allant vers le Pont Neuf',
+		txt: 'Sur le <b>quai des Orfèvres</b> en allant vers le <b>Pont Neuf</b>.',
 		position: 'any'
 	},
 	2: {
 		lat: 48.8571632408678,
 		lon: 2.340976326452218, 
 		img: '20210320_111943',
-		txt: 'La statue équestre d\'Henri IV',
+		txt: '<b>La statue équestre d\'Henri IV</b>.',
 		position: 'any'
 	},
 	3: {
 		lat: 48.857646,
 		lon: 2.339616,
 		img: '20210320_112311',
-		txt: 'le square du Vert Galant',
+		txt: 'La pointe de l\'<b>Île de la Cité</b> : le <b>square du Vert Galant</b>.',
 		position: 'any'
 	},
 	4: {
 		lat: 48.85946,
 		lon: 2.330083,
 		img: '20210320_114355',
-		txt: 'Vue sur le Pont Royal et le Pavillon de Flore',
+		txt: 'Le <b>Pont Royal</b> et le <b>Pavillon de Flore</b>.',
 		position: 'any'
 	},
 	5: {
 		lat: 48.85965,
 		lon: 2.329311,
 		img: '20210320_114531',
-		txt: 'Échelle hydrométrique gravée dans la pierre',
+		txt: '<b>Échelle hydrométrique</b> et la date de la <b>grande crue de la Seine de 1740</b> gravée dans la pierre.',
 		position: 'any'
 	},
 	6: {
 		lat: 48.86069,
 		lon: 2.32658,
 		img: '20210320_115104',
-		txt: 'En descandant sur les Berges de Seine',
+		txt: 'En descandant sur les <b>Berges de Seine</b>.',
 		position: 'any'
 	},
 	7: {
 		lat: 48.862038,
 		lon: 2.321817,
 		img: '20210320_115105',
-		txt: 'Échelle hydrométrique (mesurée en mètres NGF)',
+		txt: '<b>Échelle hydrométrique</b> (mesurée en mètres NGF).',
 		position: 'any'
 	},
 	8: {
 		lat: 48.863214,
 		lon: 2.315213,
 		img: '20210320_122919',
-		txt: 'Le Pont Alexandre III',
+		txt: 'Le <b>Pont Alexandre III</b> et le <b>Grand Palais</b> en arrière plan.',
 		position: 'last'
 	},
 	9: {
 		lat: 48.864361,
 		lon: 2.314194,
 		img: '20210320_125000',
-		txt: 'Un repère de la crue de 1910',
+		txt: 'Un repère du niveau de la <b>crue historique de 1910</b>.',
 		position: 'any'
 	}
 
@@ -118,19 +118,45 @@ loadTheMap = () => {
 	  attribution: "IGN-F/Géoportail | <a href='https://geoservices.ign.fr/documentation/services-acces.html#obtention-dune-clef-dacc%C3%A8s-aux-services-web' target='_blank'>Conditions</a> | <span><em>© 2021 Michel Gouédard, Thierry Boyer - L3Pro MPGE</em></span>"
 	}
 	).addTo(mymap);
-	
-/*
-	var popup = L.popup();
-	function onMapClick(e) {
-	  popup
-		.setLatLng(e.latlng)
-		.setContent("You clicked the map at " + e.latlng.toString())
-		.openOn(mymap);
-	}
-	mymap.on('click', onMapClick);
-*/
+
+	loadLegend(mymap);
 	loadPluPpriShp(mymap);
 };
+
+
+// aziPhecShp *****************
+loadLegend = (mymap) => {
+
+	function getColor(d) {
+		console.log('ddd', d)
+        return d === 'legend1'  ? "#FFD326" :
+               d === 'legend2'  ? "#3388FF" :
+               d === 'legend3' ? "#00eeff" :
+               "#fff";
+    }
+
+	var legend = L.control({position: 'topright'});
+		legend.onAdd = function (mymap) {
+
+		var div = L.DomUtil.create('div', 'info legend'),
+		labels = ['<strong>Légende</strong>'],
+		categories = ['Itinéraire de la sortie "Quais de Seine" du 08/03/2021.', 'Plus hautes eaux connues (PHEC) de l\'atlas des zones inondées (AZI).', 'Secteurs de risques du PPRI mentionnés dans le PLU de Paris<br/>et dans les PSMV du Marais et du 7ème arrondissement.'],
+		categoriesColors = ['legend1','legend2','legend3'];
+
+		for (var i = 0; i < categories.length; i++) {
+			div.innerHTML += 
+			labels.push(
+				'<i style="background:' + getColor(categoriesColors[i]) + '"></i> ' + (categories[i] ? categories[i] : '+')
+			);
+		}
+
+		div.innerHTML = labels.join('<br>');
+		return div;
+	};
+
+	legend.addTo(mymap);
+};
+
 
 // aziPhecShp *****************
 loadAziPhecShp = (mymap) => {
@@ -150,7 +176,7 @@ loadAziPhecShp = (mymap) => {
 loadTrackLinesShp = (mymap) => {
 	var trackLinesShp = new L.Shapefile('statics/shp/track_lines_new.zip', {
 		color: '#FFD326',
-		fillColor: '##FFD326',
+		fillColor: '#FFD326',
 		fillOpacity: 1,
 		onEachFeature: function(feature, layer) {
 			//console.log(feature, feature.properties, layer);
@@ -170,7 +196,7 @@ loadTrackLinesShp = (mymap) => {
 				  .setIcon(greenIcon)
 				  .bindPopup('<img src="statics/photos/'+mkr.img+'.jpg" width="" height="" class="" alt="" /><br />'+mkr.txt+'', {
 					maxWidth: 650
-				  });//.openPopup();
+				  });
 			} else if (mkr.position === 'last') {
 				L.marker([mkr.lat, mkr.lon])
 				  .addTo(mymap)
@@ -209,23 +235,3 @@ loadPluPpriShp = (mymap) => {
 };
 
 window.onload = loadTheMap();
-
-/*
-	L.circle([51.508, -0.11], 500, {
-		color: 'red',
-		fillColor: '#f03',
-		fillOpacity: 0.5
-	}).addTo(mymap).bindPopup("I am a circle.");
-	
-      var popup = L.popup()
-        .setLatLng([48.85660964130063, 2.3524134975939015])
-        .setContent('<img src="statics/img/ENSG-logo.jpg" width="120" height="" class="" alt="" />')
-        .openOn(jo2024Map);
-
-var imageUrl = 'https://legacy.lib.utexas.edu/maps/historical/newark_nj_1922.jpg',
-imageBounds = [[48.885244, 2.165852], [48.772464, 2.509174]];
-L.imageOverlay(imageUrl, imageBounds).addTo(jo2024Map);
-*/
-
-
-
