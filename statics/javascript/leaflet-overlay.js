@@ -1,4 +1,4 @@
-ï»¿"use strict";
+"use strict";
 
 // ICONS  *****************
 const greenIcon = L.icon({
@@ -34,28 +34,28 @@ const mapMarkers = {
 		lat: 48.85381965,
 		lon: 2.34460205, 
 		img: '20210320_110716',
-		txt: '<b>DÃ©part :</b> le quai des OrfÃ¨vres.',
+		txt: '<b>Départ :</b> le quai des Orfèvres.',
 		position: 'first'
 	},
 	1: {
 		lat: 48.856092,
 		lon: 2.341933, 
 		img: '20210320_111455',
-		txt: 'Sur le <b>quai des OrfÃ¨vres</b> en allant vers le <b>Pont Neuf</b>.',
+		txt: 'Sur le <b>quai des Orfèvres</b> en allant vers le <b>Pont Neuf</b>.',
 		position: 'any'
 	},
 	2: {
 		lat: 48.8571632408678,
 		lon: 2.340976326452218, 
 		img: '20210320_111943',
-		txt: '<b>La statue Ã©questre d\'Henri IV</b>.',
+		txt: '<b>La statue équestre d\'Henri IV</b>.',
 		position: 'any'
 	},
 	3: {
 		lat: 48.857646,
 		lon: 2.339616,
 		img: '20210320_112311',
-		txt: 'La pointe de l\'<b>ÃŽle de la CitÃ©</b> : le <b>square du Vert Galant</b>.',
+		txt: 'La pointe de l\'<b>Île de la Cité</b> : le <b>square du Vert Galant</b>.',
 		position: 'any'
 	},
 	4: {
@@ -69,7 +69,7 @@ const mapMarkers = {
 		lat: 48.85965,
 		lon: 2.329311,
 		img: '20210320_114531',
-		txt: '<b>Ã‰chelle hydromÃ©trique</b> et la date de la <b>grande crue de la Seine de 1740</b> gravÃ©e dans la pierre.',
+		txt: '<b>Échelle hydrométrique</b> et la date de la <b>grande crue de la Seine de 1740</b> gravée dans la pierre.',
 		position: 'any'
 	},
 	6: {
@@ -83,21 +83,21 @@ const mapMarkers = {
 		lat: 48.862038,
 		lon: 2.321817,
 		img: '20210320_115105',
-		txt: '<b>Ã‰chelle hydromÃ©trique</b> (mesurÃ©e en mÃ¨tres NGF).',
+		txt: '<b>Échelle hydrométrique</b> (mesurée en mètres NGF).',
 		position: 'any'
 	},
 	8: {
 		lat: 48.863214,
 		lon: 2.315213,
 		img: '20210320_122919',
-		txt: '<b>ArrivÃ©e :</b> le <b>Pont Alexandre III</b> et le <b>Grand Palais</b> en arriÃ¨re plan.',
+		txt: '<b>Arrivée :</b> le <b>Pont Alexandre III</b> et le <b>Grand Palais</b> en arrière plan.',
 		position: 'last'
 	},
 	9: {
 		lat: 48.864361,
 		lon: 2.314194,
 		img: '20210320_125000',
-		txt: 'Un repÃ¨re du niveau de la <b>crue historique de 1910</b>.',
+		txt: 'Un repère du niveau de la <b>crue historique de 1910</b>.',
 		position: 'any'
 	}
 
@@ -120,14 +120,17 @@ const loadTheMap = () => {
 		{
 		  minZoom: 0,
 		  maxZoom: 18,
-		  attribution: "IGN-F/GÃ©oportail | <a href='https://geoservices.ign.fr/documentation/services-acces.html#obtention-dune-clef-dacc%C3%A8s-aux-services-web' target='_blank'>Conditions</a> | <span><em>Â© 2021 GOUEDARD Michel - BOYER Thierry - LPRO MPGE ENSG/PARIS I</em></span>"
+		  attribution: "IGN-F/Géoportail | <a href='https://geoservices.ign.fr/documentation/services-acces.html#obtention-dune-clef-dacc%C3%A8s-aux-services-web' target='_blank'>Conditions</a> | <span><em>© 2021 GOUEDARD Michel - BOYER Thierry - LPRO MPGE ENSG/PARIS I</em></span>"
 		}
 	).addTo(mymap);
 
+
+
 	L.control.scale('metric').addTo(mymap);
 
-	loadLegend(mymap);
+	//loadLegend(mymap);
 	loadPluPpriShp(mymap);
+
 };
 
 // loadPluPpriShp *****************
@@ -221,12 +224,12 @@ const loadLegend = (mymap) => {
                "#fff";
     }
 
-	var legend = L.control({position: 'bottomright'});
+	var legend = L.control({position: 'topright'});
 		legend.onAdd = function (mymap) {
 
 		var div = L.DomUtil.create('div', 'info legend'),
-		labels = ['<strong>LÃ©gende</strong>'],
-		categories = ['ItinÃ©raire de la sortie "Quais de Seine" du 08/03/2021.', 'Plus hautes eaux connues (PHEC) de l\'atlas des zones inondÃ©es (AZI).', 'Secteurs de risques du PPRI mentionnÃ©s dans le PLU de Paris et dans les PSMV du Marais et du 7<sup>Ã¨me</sup> arr.'],
+		labels = ['<strong>Légende</strong>'],
+		categories = ['Itinéraire de la sortie "Quais de Seine" du 08/03/2021.', 'Plus hautes eaux connues (PHEC) de l\'atlas des zones inondées (AZI).', 'Secteurs de risques du PPRI mentionnés dans le PLU de Paris<br/>et dans les PSMV du Marais et du 7ème arrondissement.'],
 		categoriesColors = ['legend1','legend2','legend3'];
 
 		for (var i = 0; i < categories.length; i++) {
@@ -240,11 +243,12 @@ const loadLegend = (mymap) => {
 		return div;
 	};
 
-	legend.addTo(mymap);
+	//legend.addTo(mymap);
 };
 
 // loadControlLayers *****************
 const loadControlLayers = (mymap) => {
+
 	let buacheUrl = 'statics/img/Buache.jpg',
 		buacheBounds = [[48.877132, 2.307215], [48.834421, 2.382832]];
 	let buacheOverlay = L.imageOverlay(buacheUrl, buacheBounds);
@@ -253,14 +257,21 @@ const loadControlLayers = (mymap) => {
 	buacheOverlay.addTo(overlayMaps);
 	console.log("finished loaded buacheOverlay");
 	  var overlay  = {
-		'ItinÃ©raire (2021)': trackLinesShp,
-		'PHEC/AZI (2004)': aziPhecShp,
-		'PPRI (2016)': ppriShp,
-		'P. Buache (1740)': buacheOverlay
+		'ppri': ppriShp,
+		'aziPhec': aziPhecShp,
+		'trackLines': trackLinesShp,
+		'buache': buacheOverlay
 	  };
-
+	/*
+	  var overlay = {
+		'overlayMaps': overlayMaps
+	  };
+	*/
 	  // https://leafletjs.com/reference.html#control-layers
-	  L.control.layers({}, overlay).addTo(mymap);
+
+		console.log(overlay);
+
+	  L.control.layers(overlay).addTo(mymap);
 };
 
 window.onload = loadTheMap();
