@@ -1,4 +1,4 @@
-﻿"use strict";
+"use strict";
 
 // ICONS  *****************
 const greenIcon = L.icon({
@@ -104,13 +104,11 @@ const mapMarkers = {
 };
 
 var ppriShp, aziPhecShp, trackLinesShp;
-var overlayMaps = L.layerGroup();
+//var overlayMaps = L.layerGroup();
 
 // loadTheMap *****************
 const loadTheMap = () => {
-	var mymap = new L.map('mapid', {
-		layers: [overlayMaps]
-	}).setView([48.85660964130063, 2.3524134975939015], 14);
+	var mymap = new L.map('mapid').setView([48.85660964130063, 2.3524134975939015], 14);
 
 	const geoserviceKey = 'choisirgeoportail';
 	const geoserviceLayer = 'GEOGRAPHICALGRIDSYSTEMS.PLANIGNV2';
@@ -136,14 +134,12 @@ const loadPluPpriShp = (mymap) => {
 		color: '#00eeff',
 		fillColor: '##00eeff',
 		fillOpacity: 0.2,
-		onEachFeature: function(feature, layer) {
-			//console.log('plu-secteurs-de-risques-delimites-par-le-ppri', feature, feature.properties, layer);
-		}
+		onEachFeature: function(feature, layer) {}
 	});
 	ppriShp.addTo(mymap);
 	ppriShp.once("data:loaded", function() {
 		console.log("finished loaded loadPluPpriShp");
-		ppriShp.addTo(overlayMaps);
+		//ppriShp.addTo(overlayMaps);
 		loadAziPhecShp(mymap);
 	});
 };
@@ -151,14 +147,12 @@ const loadPluPpriShp = (mymap) => {
 // aziPhecShp *****************
 const loadAziPhecShp = (mymap) => {
 	aziPhecShp = new L.Shapefile('statics/shp/AZI-PHEC.zip', {
-		onEachFeature: function(feature, layer) {
-			//console.log(feature, feature.properties, layer);
-		}
+		onEachFeature: function(feature, layer) {}
 	});
 	aziPhecShp.addTo(mymap);
 	aziPhecShp.once("data:loaded", function() {
 		console.log("finished loaded aziPhecShp");
-		aziPhecShp.addTo(overlayMaps);
+		//aziPhecShp.addTo(overlayMaps);
 		loadTrackLinesShp(mymap);
 	});
 };
@@ -170,18 +164,14 @@ const loadTrackLinesShp = (mymap) => {
 		color: '#FFD326',
 		fillColor: '#FFD326',
 		fillOpacity: 1,
-		onEachFeature: function(feature, layer) {
-			//console.log(feature, feature.properties, layer);
-		}
+		onEachFeature: function(feature, layer) {}
 	});
 	trackLinesShp.addTo(mymap);
 	trackLinesShp.once("data:loaded", function() {
 		console.log("finished loaded trackLinesShp");
-		//console.log('mapMarkers', mapMarkers);
 
 		for (var prop in mapMarkers) {
 			let mkr = mapMarkers[prop];
-			//console.log('mkr', mkr);
 			if (mkr.position === 'first') {
 				L.marker([mkr.lat, mkr.lon])
 				  .addTo(mymap)
@@ -205,7 +195,7 @@ const loadTrackLinesShp = (mymap) => {
 				  });
 			}
 		}
-		trackLinesShp.addTo(overlayMaps);
+		//trackLinesShp.addTo(overlayMaps);
 		loadControlLayers(mymap);
 
 	});
@@ -248,19 +238,22 @@ const loadControlLayers = (mymap) => {
 	let buacheUrl = 'statics/img/Buache.jpg',
 		buacheBounds = [[48.877132, 2.307215], [48.834421, 2.382832]];
 	let buacheOverlay = L.imageOverlay(buacheUrl, buacheBounds);
-	buacheOverlay.addTo(mymap);
+	//buacheOverlay.addTo(mymap);
 
-	buacheOverlay.addTo(overlayMaps);
+	//buacheOverlay.addTo(overlayMaps);
 	console.log("finished loaded buacheOverlay");
 	  var overlay  = {
 		'Itinéraire (2021)': trackLinesShp,
-		'PHEC/AZI (2004)': aziPhecShp,
-		'PPRI (2016)': ppriShp,
-		'P. Buache (1740)': buacheOverlay
+		'PHEC / AZI (2004)': aziPhecShp,
+		'PPRi (2016)': ppriShp,
+		'Ph. Buache (1740)': buacheOverlay
 	  };
 
 	  // https://leafletjs.com/reference.html#control-layers
-	  L.control.layers({}, overlay).addTo(mymap);
+	  L.control.layers({}, overlay, {collapsed: false}).addTo(mymap);
+
+	let controlLayers = document.getElementsByClassName('leaflet-control-layers-overlays')[0];
+	controlLayers.prepend('=> Afficher les couches :');
 };
 
 window.onload = loadTheMap();
